@@ -4,12 +4,14 @@ from datetime import datetime
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 
-
+'''
 config = configparser.ConfigParser()
 config.read(".ini")
+'''
 
 app = Flask(__name__)
-app.config['MONGO_URI'] = config['PROD']['DB_URI']
+#app.config['MONGO_URI'] = config['PROD']['DB_URI']
+app.config['MONGO_URI'] = os.environ.get("MONGODB_URI")
 mongo = PyMongo(app)
 
 '''
@@ -101,3 +103,4 @@ def update(id):
 
 if __name__ == '__main__':
     app.run(debug=True)
+
